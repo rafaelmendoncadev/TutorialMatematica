@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoMath Studio - Dashboard & Trilha de Estudos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              primary: '#00288e',
+              primaryContainer: '#1e40af',
+              secondary: '#4e45d5',
+              tertiary: '#7c3aed',
+              surface: '#faf8ff',
+              surfaceLow: '#f2f3ff',
+              surfaceHigh: '#eaedff',
+              border: '#dae2fd',
+              text: '#131b2e',
+              muted: '#444653'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#faf8ff] text-[#131b2e] font-sans antialiased min-h-screen">
+
+  <!-- Top Navbar -->
+  <header class="bg-white border-b border-[#dae2fd] sticky top-0 z-30 px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-6">
+      <div class="flex items-center space-x-2 font-display font-extrabold text-xl text-[#00288e]">
+        <svg class="w-6 h-6 text-[#1e40af]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 22 22 22"/>
+        </svg>
+        <span>GeoMath</span>
+      </div>
+      <div class="relative w-80">
+        <input type="text" placeholder="Pesquisar fórmulas, teoremas..." class="w-full bg-[#f2f3ff] text-sm text-[#131b2e] rounded-lg pl-9 pr-4 py-2 border border-transparent focus:border-[#1e40af] focus:bg-white focus:outline-none transition">
+        <svg class="w-4 h-4 text-[#757684] absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-medium">
+        <a href="#" class="px-3 py-1.5 rounded-lg bg-[#eaedff] text-[#00288e] font-semibold flex items-center space-x-1.5">
+          <span>📐</span><span>Trilha</span>
+        </a>
+        <a href="#" class="px-3 py-1.5 rounded-lg text-[#444653] hover:text-[#00288e] flex items-center space-x-1.5">
+          <span>📖</span><span>Aulas</span>
+        </a>
+        <a href="#" class="px-3 py-1.5 rounded-lg text-[#444653] hover:text-[#00288e] flex items-center space-x-1.5">
+          <span>📝</span><span>Simulados</span>
+        </a>
+        <a href="#" class="px-3 py-1.5 rounded-lg text-[#444653] hover:text-[#7c3aed] flex items-center space-x-1.5">
+          <span>✨</span><span>Tutor IA</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#f2f3ff] border border-[#dae2fd] text-xs font-mono font-semibold text-[#1e40af]">
+        <span>⚡</span><span>1.240 XP</span>
+      </div>
+      <button class="bg-[#00288e] hover:bg-[#1e40af] text-white text-xs font-semibold px-3.5 py-2 rounded-lg flex items-center space-x-1.5 shadow-sm transition">
+        <span>+</span><span>Novo Simulado</span>
+      </button>
+      <button class="text-[#444653] hover:text-[#131b2e] p-1.5 rounded-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      </button>
+      <div class="w-8 h-8 rounded-full bg-[#1e40af] text-white flex items-center justify-center font-bold text-xs ring-2 ring-[#eaedff]">
+        L
+      </div>
+    </div>
+  </header>
+
+  <div class="flex min-h-[calc(100vh-61px)]">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-[#dae2fd] p-5 flex flex-col justify-between hidden lg:flex">
+      <div class="space-y-6">
+        <div>
+          <div class="flex items-center space-x-3 mb-1">
+            <div class="w-8 h-8 rounded-lg bg-[#eaedff] flex items-center justify-center text-[#1e40af] font-bold">Δ</div>
+            <div>
+              <h2 class="font-display font-bold text-sm text-[#131b2e]">GeoMath Studio</h2>
+              <p class="text-[11px] text-[#444653]">Ensino Médio & Pré-Vestibular</p>
+            </div>
+          </div>
+        </div>
+
+        <nav class="space-y-1">
+          <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl bg-[#eaedff] text-[#00288e] font-semibold text-sm">
+            <span>📊</span><span>Dashboard & Trilha</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#444653] hover:bg-[#f2f3ff] text-sm font-medium transition">
+            <span>📐</span><span>Aulas e Geometria</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#444653] hover:bg-[#f2f3ff] text-sm font-medium transition">
+            <span>📝</span><span>Simulados & Testes</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#444653] hover:bg-[#f2f3ff] text-sm font-medium transition">
+            <span>📈</span><span>Gabarito & Desempenho</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-[#7c3aed] hover:bg-[#faf5ff] text-sm font-medium transition">
+            <span>✨</span><span>Tutor IA Assistente</span>
+          </a>
+        </nav>
+
+        <div class="pt-2">
+          <button class="w-full bg-[#f2f3ff] hover:bg-[#eaedff] text-[#1e40af] border border-[#dae2fd] font-medium text-xs py-2.5 rounded-xl transition flex items-center justify-center space-x-2">
+            <span>🧮</span><span>Praticar Fórmulas</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="border-t border-[#dae2fd] pt-4 space-y-2 text-xs text-[#444653]">
+        <a href="#" class="flex items-center space-x-2 p-1.5 hover:text-[#131b2e]">
+          <span>⚙️</span><span>Configurações</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 p-1.5 hover:text-[#131b2e]">
+          <span>🎧</span><span>Central de Dúvidas</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 p-8 overflow-y-auto">
+      <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- Welcome Banner -->
+        <div class="bg-white border border-[#dae2fd] rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <div class="flex items-center space-x-2">
+              <span class="bg-[#f2f3ff] text-[#1e40af] text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full border border-[#dae2fd]">
+                🕒 MÓDULO 01 - GEOMETRIA BÁSICA
+              </span>
+              <span class="text-xs text-[#444653]">Nível: Intermediário</span>
+            </div>
+            <h1 class="font-display font-extrabold text-2xl md:text-3xl text-[#131b2e]">
+              Bem-vindo à sua Trilha Matemática, Lucas!
+            </h1>
+            <p class="text-sm text-[#444653] leading-relaxed">
+              <strong class="text-[#00288e]">Meta Ativa:</strong> Desafio 10/10: Acerte 100% no simulado final para obter a certificação de módulo. Foco contínuo em geometria euclidiana plana e conversão de grandezas.
+            </p>
+          </div>
+
+          <div class="bg-[#faf8ff] border border-[#dae2fd] rounded-xl p-4 w-full md:w-64 shrink-0 space-y-3">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-[#444653]">Progresso Geral da Trilha</span>
+              <span class="text-[#1e40af]">75% Concluído</span>
+            </div>
+            <div class="w-full bg-[#dae2fd] h-2.5 rounded-full overflow-hidden">
+              <div class="bg-[#1e40af] h-full rounded-full" style="width: 75%"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-[#444653]">
+              <span>3 de 4 módulos concluídos</span>
+              <span class="text-[#059669] font-medium">🏅 Certificado próximo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Left 2 Cols: Modules & Simulator Quick Access -->
+          <div class="lg:col-span-2 space-y-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="font-display font-bold text-lg text-[#131b2e] flex items-center space-x-2">
+                  <span>🧭</span><span>Módulos de Estudo</span>
+                </h2>
+                <p class="text-xs text-[#444653]">Avanço modular com deduções geométricas, exercícios e validação de passos.</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-[#1e40af] bg-[#eaedff] px-2.5 py-1 rounded-full">
+                ETAPA 4 EM ANDAMENTO
+              </span>
+            </div>
+
+            <!-- Modules Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Card 1 -->
+              <div class="bg-white border border-[#dae2fd] rounded-xl p-5 shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="w-8 h-8 rounded-lg bg-[#f2f3ff] text-[#1e40af] flex items-center justify-center text-sm font-bold">📏</span>
+                  <span class="text-[11px] font-semibold text-[#059669] bg-[#ecfdf5] px-2 py-0.5 rounded-full">100% Concluído</span>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-[#131b2e]">1. Sistema de Medida & Conversão</h3>
+                  <p class="text-xs text-[#444653] mt-1 leading-relaxed">Domine as escalas lineares e cúbicas: km, m, cm, mm; litros; gramas; conversão de unidades lineares e de área.</p>
+                </div>
+                <div class="bg-[#faf8ff] p-3 rounded-lg font-mono text-xs text-[#1e40af] border border-[#eaedff]">
+                  1 m² = 10.000 cm² • 1 L = 1.000 mL
+                </div>
+                <div class="flex items-center justify-between text-xs text-[#444653] pt-1">
+                  <span>⏱️ 45 min</span>
+                  <a href="#" class="text-[#1e40af] font-semibold hover:underline">Revisar →</a>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="bg-white border border-[#dae2fd] rounded-xl p-5 shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="w-8 h-8 rounded-lg bg-[#f2f3ff] text-[#1e40af] flex items-center justify-center text-sm font-bold">🟦</span>
+                  <span class="text-[11px] font-semibold text-[#059669] bg-[#ecfdf5] px-2 py-0.5 rounded-full">100% Concluído</span>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-[#131b2e]">2. Área do Quadrado & Propriedades</h3>
+                  <p class="text-xs text-[#444653] mt-1 leading-relaxed">Fórmula A = L², cálculo de perímetro, relação com a diagonal d = L√2 e aplicações práticas cotidianas.</p>
+                </div>
+                <div class="bg-[#faf8ff] p-3 rounded-lg font-mono text-xs text-[#1e40af] border border-[#eaedff]">
+                  A = L² | 2p = 4L | d = L√2
+                </div>
+                <div class="flex items-center justify-between text-xs text-[#444653] pt-1">
+                  <span>⏱️ 35 min</span>
+                  <a href="#" class="text-[#1e40af] font-semibold hover:underline">Revisar →</a>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="bg-white border border-[#dae2fd] rounded-xl p-5 shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="w-8 h-8 rounded-lg bg-[#f2f3ff] text-[#1e40af] flex items-center justify-center text-sm font-bold">⭕</span>
+                  <span class="text-[11px] font-semibold text-[#059669] bg-[#ecfdf5] px-2 py-0.5 rounded-full">100% Concluído</span>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-[#131b2e]">3. Área do Círculo & Circunferência</h3>
+                  <p class="text-xs text-[#444653] mt-1 leading-relaxed">Construção intuitiva da área A = πr², comprimento C = 2πr, raio, diâmetro e aproximações de π (≈ 3,14).</p>
+                </div>
+                <div class="bg-[#faf8ff] p-3 rounded-lg font-mono text-xs text-[#1e40af] border border-[#eaedff]">
+                  A = π r² | C = 2π r (π ≈ 3,14)
+                </div>
+                <div class="flex items-center justify-between text-xs text-[#444653] pt-1">
+                  <span>⏱️ 50 min</span>
+                  <a href="#" class="text-[#1e40af] font-semibold hover:underline">Revisar →</a>
+                </div>
+              </div>
+
+              <!-- Card 4 (Active) -->
+              <div class="bg-white border-2 border-[#1e40af] rounded-xl p-5 shadow-md space-y-3 relative">
+                <div class="absolute -top-3 right-4 bg-[#00288e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Módulo Atual
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="w-8 h-8 rounded-lg bg-[#eaedff] text-[#00288e] flex items-center justify-center text-sm font-bold">🔺</span>
+                  <span class="text-[11px] font-semibold text-[#1e40af] bg-[#f2f3ff] px-2 py-0.5 rounded-full">60% em curso</span>
+                </div>
+                <div>
+                  <h3 class="font-display font-bold text-sm text-[#131b2e]">4. Lógica do Triângulo & Geometria</h3>
+                  <p class="text-xs text-[#444653] mt-1 leading-relaxed">Soma dos ângulos internos = 180°, Teorema de Pitágoras (a² + b² = c²), e tipologias: equilátero, isósceles, escaleno, retângulo.</p>
+                </div>
+                <div class="bg-[#f2f3ff] p-3 rounded-lg font-mono text-xs text-[#00288e] border border-[#dae2fd]">
+                  α + β + γ = 180° | a² + b² = c²
+                </div>
+                <div class="flex items-center justify-between text-xs text-[#444653] pt-1">
+                  <span>⏱️ 60 min</span>
+                  <button class="bg-[#00288e] hover:bg-[#1e40af] text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">Continuar →</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Simulado 10/10 Quick Access Card -->
+            <div class="bg-white border border-[#dae2fd] rounded-2xl p-6 shadow-sm space-y-4">
+              <div class="flex items-center space-x-2 text-[#00288e] font-display font-bold text-base">
+                <span>☑️</span><span>Acesso Rápido ao Simulado 10/10</span>
+              </div>
+              <p class="text-xs text-[#444653] leading-relaxed">
+                Teste seu domínio integral de grandezas, áreas planas e triângulos. O teste final exige precisão máxima para desbloqueio da insígnia.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <div class="bg-[#faf8ff] p-3 rounded-xl border border-[#dae2fd] text-center">
+                  <div class="text-[11px] text-[#444653]">Última Tentativa</div>
+                  <div class="text-sm font-bold font-mono text-[#00288e] mt-0.5">8/10 acertos (80%)</div>
+                </div>
+                <div class="bg-[#faf8ff] p-3 rounded-xl border border-[#dae2fd] text-center">
+                  <div class="text-[11px] text-[#444653]">Tempo Médio</div>
+                  <div class="text-sm font-bold font-mono text-[#131b2e] mt-0.5">14 min 30 s</div>
+                </div>
+                <div class="bg-[#faf8ff] p-3 rounded-xl border border-[#dae2fd] text-center">
+                  <div class="text-[11px] text-[#444653]">Meta de Certificação</div>
+                  <div class="text-sm font-bold font-mono text-[#059669] mt-0.5">10/10 (100%)</div>
+                </div>
+                <div>
+                  <button class="w-full bg-[#00288e] hover:bg-[#1e40af] text-white text-xs font-bold py-3.5 px-4 rounded-xl shadow-md transition text-center flex items-center justify-center space-x-2">
+                    <span>🚀</span><span>Iniciar Simulado</span>
+                  </button>
+                  <p class="text-[10px] text-center text-[#757684] mt-1">Gera gabarito passo a passo imediato</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: AI Hint & Formula Reference -->
+          <div class="space-y-6">
+            
+            <!-- AI Daily Tip -->
+            <div class="bg-gradient-to-br from-[#faf5ff] to-white border border-[#e9d5ff] rounded-2xl p-6 shadow-sm space-y-4">
+              <div class="flex items-center justify-between text-[#7c3aed]">
+                <div class="flex items-center space-x-2">
+                  <span>✨</span>
+                  <h3 class="font-display font-bold text-sm">Dica Diária da IA</h3>
+                </div>
+                <span class="text-xs">💡</span>
+              </div>
+              <div class="text-xs font-semibold text-[#7c3aed]">Intuição Geométrica</div>
+              <p class="text-xs text-[#444653] leading-relaxed">
+                Atenção na conversão de áreas: Ao converter metros quadrados para centímetros quadrados, você deve elevar o fator linear ao quadrado!
+              </p>
+              <div class="bg-white p-3.5 rounded-xl border border-[#e9d5ff] font-mono text-xs text-[#7c3aed] space-y-1">
+                <div>1 m = 100 cm</div>
+                <div>(1 m)² = (100 cm)² = 10.000 cm²</div>
+              </div>
+              <p class="text-[11px] text-[#dc2626] font-medium">
+                ⚠️ Nunca multiplique apenas por 100 em problemas de área e malha plana!
+              </p>
+              <button class="w-full bg-[#f3e8ff] hover:bg-[#e9d5ff] text-[#7c3aed] text-xs font-semibold py-2 rounded-xl transition">
+                💬 Tirar Dúvida com o Tutor
+              </button>
+            </div>
+
+            <!-- Rapid Formulas -->
+            <div class="bg-white border border-[#dae2fd] rounded-2xl p-6 shadow-sm space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-sm text-[#131b2e] flex items-center space-x-2">
+                  <span>📑</span><span>Fórmulas Rápidas</span>
+                </h3>
+                <span class="text-[10px] font-mono text-[#757684]">MÓDULO 01</span>
+              </div>
+
+              <div class="space-y-3">
+                <div class="p-3 rounded-xl bg-[#faf8ff] border border-[#eaedff]">
+                  <div class="text-[11px] text-[#444653] font-medium flex justify-between">
+                    <span>Área do Quadrado</span>
+                    <span class="font-mono text-[#1e40af]">Lado = L</span>
+                  </div>
+                  <div class="font-mono text-sm font-bold text-[#00288e] mt-1">A = L²</div>
+                  <div class="text-[11px] text-[#757684] mt-0.5">Diagonal: d = L√2</div>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#faf8ff] border border-[#eaedff]">
+                  <div class="text-[11px] text-[#444653] font-medium flex justify-between">
+                    <span>Círculo & Circunferência</span>
+                    <span class="font-mono text-[#1e40af]">Raio = r</span>
+                  </div>
+                  <div class="font-mono text-sm font-bold text-[#00288e] mt-1">A = π r² | C = 2π r</div>
+                  <div class="text-[11px] text-[#757684] mt-0.5">Diâmetro: D = 2r (π ≈ 3,14)</div>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#faf8ff] border border-[#eaedff]">
+                  <div class="text-[11px] text-[#444653] font-medium flex justify-between">
+                    <span>Triângulos & Pitágoras</span>
+                    <span class="font-mono text-[#1e40af]">Catetos a, b; Hip c</span>
+                  </div>
+                  <div class="font-mono text-sm font-bold text-[#00288e] mt-1">a² + b² = c²</div>
+                  <div class="text-[11px] text-[#757684] mt-0.5">Soma ângulos: Σ = 180° | Área: (b×h)/2</div>
+                </div>
+              </div>
+
+              <a href="#" class="block text-center text-xs text-[#1e40af] font-semibold hover:underline pt-1">
+                Ver tabela completa de equivalências →
+              </a>
+            </div>
+
+            <!-- Certification Card -->
+            <div class="bg-[#faf8ff] border border-[#dae2fd] rounded-2xl p-5 shadow-sm flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-full bg-[#eaedff] flex items-center justify-center text-xl text-[#00288e]">
+                🛡️
+              </div>
+              <div class="text-xs">
+                <div class="font-display font-bold text-[#131b2e]">Certificação Pró-Geometria</div>
+                <p class="text-[#444653] mt-0.5">Conclua o Simulado 10/10 com 100% de acerto para emitir com chave hash.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

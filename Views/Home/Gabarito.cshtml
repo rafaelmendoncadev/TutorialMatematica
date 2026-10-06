@@ -1,0 +1,437 @@
+@model TutorialMatematica.Models.ExamResult
+@{
+    ViewData["Title"] = "Gabarito & Desempenho Oficial";
+}
+
+<div class="space-y-4 sm:space-y-6">
+
+    <!-- Top Action Breadcrumbs / Status -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-3 text-[11px] sm:text-xs text-slate-500">
+        <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar whitespace-nowrap">
+            <a asp-controller="Home" asp-action="Index" class="hover:text-primary transition-colors">Início</a>
+            <span>›</span>
+            <span>Simulado Oficial</span>
+            <span>›</span>
+            <span class="text-primary font-bold">Gabarito Analítico</span>
+        </div>
+        <div class="flex items-center gap-2 font-mono">
+            <span class="text-primary font-bold">Exame: @Model.ExamId</span>
+            <span>&bull;</span>
+            <span>@Model.CompletedAt.ToString("dd/MM/yyyy HH:mm")</span>
+        </div>
+    </div>
+
+    <!-- MAIN TWO COLUMN GRID: Left (Scorecard) + Right (Questions & Tutor Chat) -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+
+        <!-- LEFT SIDEBAR: Scorecard & Actions -->
+        <div class="space-y-4 sm:space-y-6">
+
+            <!-- Scorecard Card -->
+            <div class="bg-white border border-indigo-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs space-y-4 sm:space-y-5">
+                <div>
+                    <h3 class="font-extrabold text-sm sm:text-base text-slate-900">Desempenho Geral</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-500">Simulado de 10 Questões</p>
+                </div>
+
+                <!-- Circular Score Badge -->
+                <div class="p-4 sm:p-5 rounded-2xl @(Model.IsApproved ? "bg-emerald-50 border border-emerald-200" : "bg-[#FAF8FF] border border-indigo-100") text-center space-y-1.5 sm:space-y-2">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full border-4 @(Model.IsApproved ? "border-emerald-600 text-emerald-700 bg-white" : "border-primary text-primary bg-white") flex items-center justify-center font-black text-xl sm:text-2xl font-mono shadow-xs">
+                        @Model.CorrectCount/10
+                    </div>
+                    <div class="text-xs sm:text-sm font-extrabold @(Model.IsApproved ? "text-emerald-700" : "text-primary")">
+                        @Model.ScorePercentage% de Precisão
+                    </div>
+                    <div class="text-[10px] sm:text-[11px] font-mono text-slate-500">
+                        ⏱️ Tempo: @Model.ElapsedFormatted
+                    </div>
+                </div>
+
+                <!-- Stat Rows -->
+                <div class="space-y-1.5 sm:space-y-2 text-xs">
+                    <div class="flex items-center justify-between p-2.5 sm:p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-emerald-800 font-semibold">
+                        <span class="flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                            Corretas
+                        </span>
+                        <span class="font-mono font-bold">@Model.CorrectCount</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2.5 sm:p-3 bg-rose-50 rounded-xl border border-rose-100 text-rose-800 font-semibold">
+                        <span class="flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px] text-rose-600">cancel</span>
+                            Incorretas
+                        </span>
+                        <span class="font-mono font-bold">@Model.IncorrectCount</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2.5 sm:p-3 bg-indigo-50/70 rounded-xl border border-indigo-100 text-primary font-semibold">
+                        <span class="flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[16px] text-secondary">bolt</span>
+                            XP Ganho
+                        </span>
+                        <span class="font-mono font-bold">+@Model.GainedXp XP</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="space-y-2 pt-1 border-t border-slate-100">
+                    <form asp-controller="Home" asp-action="NovaProva" method="post">
+                        <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white text-xs font-bold py-2.5 sm:py-3 px-4 rounded-xl shadow-md shadow-primary/20 transition flex items-center justify-center gap-1.5 active:scale-98">
+                            <span class="material-symbols-outlined text-[16px]">refresh</span>
+                            <span>Gerar Nova Prova (10Q)</span>
+                        </button>
+                    </form>
+
+                    <a asp-controller="Home" asp-action="Aulas" class="w-full bg-indigo-50 hover:bg-indigo-100 text-primary text-xs font-bold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-1.5 border border-indigo-200">
+                        <span class="material-symbols-outlined text-[16px]">menu_book</span>
+                        <span>Revisar Aulas</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- AI Tutor Status Helper Card -->
+            <div class="bg-gradient-to-br from-purple-50 to-white border border-purple-200 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-xs space-y-2.5 sm:space-y-3">
+                <div class="flex items-center gap-1.5 text-tutor-purple font-bold text-xs">
+                    <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                    <span>Tutor IA Disponível</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Dúvidas em alguma questão? Clique em <strong>Perguntar ao Tutor IA</strong> abaixo para obter explicações passo a passo.
+                </p>
+                <div class="text-[10px] sm:text-[11px] font-mono text-purple-700 bg-purple-100/60 p-2 rounded-xl">
+                    Google Gemini 2.5 Flash
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT CONTENT: Approval / Retry Banner & Question Review Cards -->
+        <div class="lg:col-span-3 space-y-4 sm:space-y-6">
+
+            <!-- Result Header Banner -->
+            <div class="bg-white border rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-7 shadow-xs space-y-3 sm:space-y-4 @(Model.IsApproved ? "border-emerald-200 bg-gradient-to-br from-emerald-50/40 via-white to-emerald-50/20" : "border-rose-200 bg-gradient-to-br from-rose-50/30 via-white to-rose-50/10")">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div class="flex items-center gap-2">
+                            @if (Model.IsApproved)
+                            {
+                                <span class="bg-emerald-100 text-emerald-800 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-emerald-300 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px] sm:text-[16px]">military_tech</span>
+                                    100% APROVADO &bull; CERTIFICADO LIBERADO!
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="bg-rose-100 text-rose-800 text-[10px] sm:text-xs font-mono font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-rose-200 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px] sm:text-[16px]">warning</span>
+                                    CRITÉRIO 10/10 NÃO ATINGIDO
+                                </span>
+                            }
+                        </div>
+
+                        <h2 class="font-extrabold text-lg sm:text-xl lg:text-2xl text-slate-900 tracking-tight leading-snug">
+                            @(Model.IsApproved ? "Parabéns, Carlos Eduardo! Domínio Absoluto em Geometria Euclidiana!" : $"Resultado: {Model.CorrectCount} de 10 Acertos ({Model.ScorePercentage}%)")
+                        </h2>
+
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+                            @if (Model.IsApproved)
+                            {
+                                <span>Você obteve nota máxima no simulado oficial! Todos os passos matemáticos foram validados. Seu certificado de módulo foi desbloqueado com autenticação algorítmica.</span>
+                            }
+                            else
+                            {
+                                <span>A emissão do certificado exige <strong>100% de acerto (10/10)</strong>. Você errou @Model.IncorrectCount questão(ões). Analise a resolução passo a passo de cada erro abaixo, converse com o Tutor IA e tente novamente!</span>
+                            }
+                        </p>
+                    </div>
+
+                    <div class="shrink-0 flex sm:flex-col gap-2 w-full sm:w-auto">
+                        <form asp-controller="Home" asp-action="NovaProva" method="post" class="w-full">
+                            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 sm:py-3 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 whitespace-nowrap active:scale-98">
+                                <span class="material-symbols-outlined text-[16px]">refresh</span>
+                                <span>Refazer Simulado</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUESTIONS REVIEW LIST -->
+            <div class="space-y-4 sm:space-y-6">
+                @for (int i = 0; i < Model.Evaluations.Count; i++)
+                {
+                    var eval = Model.Evaluations[i];
+                    var q = eval.Question;
+
+                    <div id="eval_card_@q.Number" class="bg-white border rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-7 shadow-xs space-y-3.5 sm:space-y-5 transition-all @(eval.IsCorrect ? "border-emerald-200" : "border-rose-300 ring-1 ring-rose-100")">
+
+                        <!-- Card Top Bar -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 sm:pb-4 border-b border-slate-100 gap-2">
+                            <div class="flex items-center gap-2.5 sm:gap-3">
+                                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold font-mono shrink-0 @(eval.IsCorrect ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800")">
+                                    @(eval.IsCorrect ? "✓" : "✗")
+                                </div>
+                                <div>
+                                    <span class="font-extrabold text-xs sm:text-sm @(eval.IsCorrect ? "text-emerald-800" : "text-rose-800")">
+                                        Questão @q.Number &bull; @(eval.IsCorrect ? "Acerto Perfeito (+50 XP)" : "Resposta Incorreta (Revisar)")
+                                    </span>
+                                    <div class="text-[10px] sm:text-[11px] text-slate-500 font-mono">
+                                        @q.Topic &rsaquo; @q.SubTopic
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                    onclick="openTutorModal('@q.Id', '@q.Number', '@eval.SelectedOptionKey')"
+                                    class="text-xs font-bold text-tutor-purple hover:text-purple-900 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1 self-start sm:self-auto active:scale-95">
+                                <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+                                <span>Perguntar ao Tutor IA</span>
+                            </button>
+                        </div>
+
+                        <!-- Statement -->
+                        <div class="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">
+                            @q.Statement
+                        </div>
+
+                        <!-- Answer Comparison Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4">
+                            <!-- Student Choice -->
+                            <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl border space-y-1 @(eval.IsCorrect ? "bg-emerald-50/70 border-emerald-200" : "bg-rose-50/70 border-rose-200")">
+                                <div class="flex items-center gap-1.5 text-xs font-bold @(eval.IsCorrect ? "text-emerald-800" : "text-rose-800")">
+                                    <span class="material-symbols-outlined text-[16px]">@(eval.IsCorrect ? "check" : "close")</span>
+                                    <span>VOCÊ MARCOU:</span>
+                                </div>
+                                <div class="font-mono-math text-xs sm:text-sm font-bold @(eval.IsCorrect ? "text-emerald-900" : "text-rose-900")">
+                                    @eval.SelectedOptionText
+                                </div>
+                                @if (!eval.IsCorrect)
+                                {
+                                    <p class="text-[10px] sm:text-[11px] text-rose-700 pt-0.5 leading-relaxed">
+                                        ⚠️ Armadilha conceitual: @q.ConceptualTrap
+                                    </p>
+                                }
+                            </div>
+
+                            <!-- Correct Answer -->
+                            <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-1">
+                                <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-800">
+                                    <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                    <span>GABARITO OFICIAL:</span>
+                                </div>
+                                <div class="font-mono-math text-xs sm:text-sm font-bold text-emerald-900">
+                                    @eval.CorrectOptionText
+                                </div>
+                                <p class="text-[10px] sm:text-[11px] text-emerald-700 pt-0.5">
+                                    Referência: @q.ParameterSummary
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- SVG & Step-by-Step Resolution -->
+                        <div class="bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 flex flex-col md:flex-row items-center gap-4 sm:gap-6">
+                            <div class="w-full md:w-60 h-32 sm:h-36 bg-white p-2 rounded-xl border border-indigo-100 shadow-2xs flex items-center justify-center shrink-0 overflow-hidden mx-auto md:mx-0">
+                                @Html.Raw(q.DiagramSvg)
+                            </div>
+                            <div class="space-y-1.5 sm:space-y-2 text-xs font-mono-math text-slate-700 flex-1 w-full">
+                                <div class="font-bold text-primary flex items-center gap-1 font-sans">
+                                    <span class="material-symbols-outlined text-[16px]">menu_book</span>
+                                    Resolução Oficial Passo a Passo:
+                                </div>
+                                <div class="p-2 sm:p-2.5 bg-white rounded-xl border border-indigo-100/80 shadow-2xs text-slate-800 text-[11px] sm:text-xs">
+                                    @q.ExplanationStep1
+                                </div>
+                                <div class="p-2 sm:p-2.5 bg-white rounded-xl border border-indigo-100/80 shadow-2xs text-slate-800 text-[11px] sm:text-xs">
+                                    @q.ExplanationStep2
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Embedded Interactive Tutor Thread for this Question -->
+                        <div id="tutor_box_@q.Id" class="hidden bg-gradient-to-br from-purple-50/80 to-indigo-50/50 border border-purple-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 space-y-3 sm:space-y-4">
+                            <div class="flex items-center justify-between text-tutor-purple font-bold text-xs">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[18px]">psychology</span>
+                                    <span>Tutor IA Gemini &bull; Dúvida na Q@q.Number</span>
+                                </div>
+                                <button type="button" onclick="closeTutorBox('@q.Id')" class="text-slate-400 hover:text-slate-600 text-xs px-2 py-1">
+                                    Fechar ✕
+                                </button>
+                            </div>
+
+                            <!-- Conversation Bubbles Container -->
+                            <div id="chat_bubbles_@q.Id" class="space-y-2.5 sm:space-y-3 max-h-72 sm:max-h-80 overflow-y-auto text-xs pr-1">
+                                <!-- Initial Tutor Welcome -->
+                                <div class="flex items-start gap-2">
+                                    <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-tutor-purple text-white flex items-center justify-center text-xs font-bold shrink-0">
+                                        IA
+                                    </div>
+                                    <div class="bg-white p-3 rounded-2xl border border-purple-100 shadow-2xs text-slate-800 max-w-xl leading-relaxed text-[11px] sm:text-xs">
+                                        Olá, Carlos Eduardo! Estou analisando a Questão @q.Number (@q.SubTopic). Qual é a sua principal dúvida sobre o cálculo ou a fórmula?
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preset Quick Questions -->
+                            <div class="flex flex-wrap gap-1.5 text-[10px] sm:text-[11px]">
+                                <button type="button" onclick="sendQuickTutorQuestion('@q.Id', 'Por que errei essa questão e qual foi a armadilha?', '@eval.SelectedOptionKey')" class="px-2.5 py-1 rounded-lg bg-white border border-purple-200 text-purple-900 hover:bg-purple-100 transition-colors">
+                                    ❓ Por que errei e qual foi a pegadinha?
+                                </button>
+                                <button type="button" onclick="sendQuickTutorQuestion('@q.Id', 'Pode me dar um exemplo parecido com outros números?', '@eval.SelectedOptionKey')" class="px-2.5 py-1 rounded-lg bg-white border border-purple-200 text-purple-900 hover:bg-purple-100 transition-colors">
+                                    📐 Exemplo semelhante passo a passo
+                                </button>
+                            </div>
+
+                            <!-- Input Bar (Responsive flex) -->
+                            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
+                                <input type="text"
+                                       id="input_tutor_@q.Id"
+                                       placeholder="Digite sua dúvida sobre esta questão..."
+                                       onkeydown="if(event.key === 'Enter'){ sendTutorQuestion('@q.Id', '@eval.SelectedOptionKey'); }"
+                                       class="flex-1 bg-white text-xs text-slate-800 rounded-xl px-3.5 py-2.5 border border-purple-200 focus:border-tutor-purple focus:ring-1 focus:ring-tutor-purple focus:outline-none transition-all" />
+                                <button type="button"
+                                        id="btn_send_@q.Id"
+                                        onclick="sendTutorQuestion('@q.Id', '@eval.SelectedOptionKey')"
+                                        class="bg-tutor-purple hover:bg-purple-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-xs transition-colors flex items-center justify-center gap-1 active:scale-95">
+                                    <span>Perguntar</span>
+                                    <span class="material-symbols-outlined text-[16px]">send</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+<script>
+    function openTutorModal(questionId, qNum, selectedKey) {
+        const box = document.getElementById(`tutor_box_${questionId}`);
+        if (box) {
+            box.classList.remove('hidden');
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const input = document.getElementById(`input_tutor_${questionId}`);
+            if (input) input.focus();
+        }
+    }
+
+    function closeTutorBox(questionId) {
+        const box = document.getElementById(`tutor_box_${questionId}`);
+        if (box) box.classList.add('hidden');
+    }
+
+    function sendQuickTutorQuestion(questionId, text, selectedKey) {
+        const input = document.getElementById(`input_tutor_${questionId}`);
+        if (input) input.value = text;
+        sendTutorQuestion(questionId, selectedKey);
+    }
+
+    async function sendTutorQuestion(questionId, selectedKey) {
+        const input = document.getElementById(`input_tutor_${questionId}`);
+        const chatContainer = document.getElementById(`chat_bubbles_${questionId}`);
+        const sendBtn = document.getElementById(`btn_send_${questionId}`);
+
+        if (!input || !chatContainer || !input.value.trim()) return;
+
+        const userMsg = input.value.trim();
+        input.value = '';
+
+        // Render Student Bubble
+        const studentBubble = document.createElement('div');
+        studentBubble.className = "flex justify-end";
+        studentBubble.innerHTML = `
+            <div class="bg-primary text-white text-xs p-3 rounded-2xl rounded-tr-sm max-w-md shadow-xs">
+                ${escapeHtml(userMsg)}
+            </div>
+        `;
+        chatContainer.appendChild(studentBubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        // Render Loading Indicator
+        const loadingBubble = document.createElement('div');
+        loadingBubble.id = `loading_${questionId}`;
+        loadingBubble.className = "flex items-start gap-2";
+        loadingBubble.innerHTML = `
+            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-tutor-purple text-white flex items-center justify-center text-xs font-bold shrink-0">
+                IA
+            </div>
+            <div class="bg-white p-3 rounded-2xl border border-purple-100 text-slate-500 italic flex items-center gap-2 text-xs">
+                <span class="w-2 h-2 rounded-full bg-tutor-purple animate-ping"></span>
+                Tutor IA pensando na melhor explicação...
+            </div>
+        `;
+        chatContainer.appendChild(loadingBubble);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        if (sendBtn) sendBtn.disabled = true;
+
+        try {
+            const resp = await fetch('/Home/PerguntarTutor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    questionId: questionId,
+                    message: userMsg,
+                    selectedOptionKey: selectedKey
+                })
+            });
+
+            const data = await resp.json();
+            const loadingElem = document.getElementById(`loading_${questionId}`);
+            if (loadingElem) loadingElem.remove();
+
+            const tutorBubble = document.createElement('div');
+            tutorBubble.className = "flex items-start gap-2";
+            
+            const formattedAnswer = formatMarkdownText(data.answer || "Não foi possível carregar a resposta.");
+
+            tutorBubble.innerHTML = `
+                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-tutor-purple text-white flex items-center justify-center text-xs font-bold shrink-0">
+                    IA
+                </div>
+                <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-purple-100 shadow-2xs text-slate-800 max-w-xl leading-relaxed space-y-1.5 text-xs">
+                    <div class="font-bold text-tutor-purple text-[10px] sm:text-[11px] uppercase tracking-wider">Tutor Gemini:</div>
+                    <div>${formattedAnswer}</div>
+                </div>
+            `;
+            chatContainer.appendChild(tutorBubble);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        } catch (err) {
+            console.error(err);
+            const loadingElem = document.getElementById(`loading_${questionId}`);
+            if (loadingElem) loadingElem.remove();
+
+            const errorBubble = document.createElement('div');
+            errorBubble.className = "text-rose-600 text-[11px] p-2 bg-rose-50 rounded-xl";
+            errorBubble.innerText = "Erro ao conectar com o Tutor IA. Tente novamente.";
+            chatContainer.appendChild(errorBubble);
+        } finally {
+            if (sendBtn) sendBtn.disabled = false;
+        }
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.innerText = text;
+        return div.innerHTML;
+    }
+
+    function formatMarkdownText(raw) {
+        let res = escapeHtml(raw);
+        res = res.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        res = res.replace(/\n\s*•\s*/g, '<br/>&bull; ');
+        res = res.replace(/\n\n/g, '<br/><br/>').replace(/\n/g, '<br/>');
+        return res;
+    }
+</script>
+}

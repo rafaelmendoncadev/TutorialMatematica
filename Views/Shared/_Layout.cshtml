@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>@ViewData["Title"] - Plataforma de Matemática Interativa</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols Outlined -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00288E',
+                        'primary-dark': '#001D6E',
+                        'primary-light': '#E0E7FF',
+                        secondary: '#4E45D5',
+                        'secondary-dark': '#4338CA',
+                        'tutor-purple': '#7C3AED',
+                        'surface-bg': '#FAF8FF',
+                        'surface-low': '#F2F3FF',
+                        'surface-container': '#EAEDFF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF8FF;
+            color: #1E293B;
+            -webkit-tap-highlight-color: transparent;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-mono-math {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Mobile scrollbar hide utility */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FAF8FF] text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-indigo-100 shadow-xs transition-all">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14 sm:h-16">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a asp-controller="Home" asp-action="Index" class="flex items-center gap-2 sm:gap-2.5 group">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white shadow-md shadow-indigo-900/20 group-hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined text-xl sm:text-2xl">architecture</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] sm:text-xs font-mono font-bold tracking-widest uppercase text-secondary block -mb-1">Geometric Insight</span>
+                            <span class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">GeoMath</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Tabs -->
+                <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200/60">
+                    <a asp-controller="Home" asp-action="Index"
+                       class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "bg-white text-primary shadow-sm" : "text-slate-600 hover:text-slate-900 hover:bg-white/50")">
+                        <span class="material-symbols-outlined text-[18px] mr-1">dashboard</span>
+                        Dashboard
+                    </a>
+                    <a asp-controller="Home" asp-action="Aulas"
+                       class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all @(ViewContext.RouteData.Values["Action"]?.ToString() == "Aulas" ? "bg-white text-primary shadow-sm" : "text-slate-600 hover:text-slate-900 hover:bg-white/50")">
+                        <span class="material-symbols-outlined text-[18px] mr-1">menu_book</span>
+                        Aulas & Teoria
+                    </a>
+                    <a asp-controller="Home" asp-action="Simulado"
+                       class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all @(ViewContext.RouteData.Values["Action"]?.ToString() == "Simulado" ? "bg-white text-primary shadow-sm" : "text-slate-600 hover:text-slate-900 hover:bg-white/50")">
+                        <span class="material-symbols-outlined text-[18px] mr-1">quiz</span>
+                        Simulado Oficial
+                    </a>
+                    <a asp-controller="Home" asp-action="Gabarito"
+                       class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-all @(ViewContext.RouteData.Values["Action"]?.ToString() == "Gabarito" ? "bg-white text-primary shadow-sm" : "text-slate-600 hover:text-slate-900 hover:bg-white/50")">
+                        <span class="material-symbols-outlined text-[18px] mr-1">task_alt</span>
+                        Gabarito & Correção
+                    </a>
+                </nav>
+
+                <!-- Student Profile Header Badge -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <div class="flex items-center gap-1.5 bg-indigo-50 border border-indigo-100 px-2 sm:px-2.5 py-1 rounded-full">
+                        <span class="text-amber-500 text-xs sm:text-sm">⚡</span>
+                        <span class="text-[11px] sm:text-xs font-mono font-bold text-primary">1.240 XP</span>
+                    </div>
+
+                    <div class="hidden sm:flex flex-col text-right">
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Aluno</span>
+                        <div class="flex items-center gap-1">
+                            <span class="text-xs sm:text-sm font-bold text-slate-900">Carlos Eduardo</span>
+                            <span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800">Nv. 4</span>
+                        </div>
+                    </div>
+
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center text-primary font-bold text-xs sm:text-sm shadow-inner" title="Carlos Eduardo">
+                        CE
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Horizontal Tab Pills -->
+        <div class="flex md:hidden border-t border-slate-100 px-2.5 py-1.5 gap-1.5 overflow-x-auto no-scrollbar bg-slate-50/90">
+            <a asp-controller="Home" asp-action="Index" class="px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1 @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "bg-primary text-white shadow-xs" : "text-slate-600 hover:bg-white")">
+                <span class="material-symbols-outlined text-[14px]">dashboard</span>
+                Dashboard
+            </a>
+            <a asp-controller="Home" asp-action="Aulas" class="px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1 @(ViewContext.RouteData.Values["Action"]?.ToString() == "Aulas" ? "bg-primary text-white shadow-xs" : "text-slate-600 hover:bg-white")">
+                <span class="material-symbols-outlined text-[14px]">menu_book</span>
+                Aulas
+            </a>
+            <a asp-controller="Home" asp-action="Simulado" class="px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1 @(ViewContext.RouteData.Values["Action"]?.ToString() == "Simulado" ? "bg-primary text-white shadow-xs" : "text-slate-600 hover:bg-white")">
+                <span class="material-symbols-outlined text-[14px]">quiz</span>
+                Simulado 10Q
+            </a>
+            <a asp-controller="Home" asp-action="Gabarito" class="px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1 @(ViewContext.RouteData.Values["Action"]?.ToString() == "Gabarito" ? "bg-primary text-white shadow-xs" : "text-slate-600 hover:bg-white")">
+                <span class="material-symbols-outlined text-[14px]">task_alt</span>
+                Gabarito
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN BODY CONTENT -->
+    <main role="main" class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-24 md:pb-10">
+        @RenderBody()
+    </main>
+
+    <!-- MOBILE FIXED BOTTOM NAVIGATION DOCK -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-indigo-100 py-1 px-2 flex justify-around items-center shadow-[0_-4px_16px_rgba(0,0,0,0.06)]" style="padding-bottom: max(0.5rem, env(safe-area-inset-bottom));">
+        <a asp-controller="Home" asp-action="Index" class="flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-colors @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "text-primary font-bold" : "text-slate-400 hover:text-slate-600")">
+            <span class="material-symbols-outlined text-[20px] @(ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "icon-fill" : "")">dashboard</span>
+            <span class="text-[10px] mt-0.5">Trilha</span>
+        </a>
+        <a asp-controller="Home" asp-action="Aulas" class="flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-colors @(ViewContext.RouteData.Values["Action"]?.ToString() == "Aulas" ? "text-primary font-bold" : "text-slate-400 hover:text-slate-600")">
+            <span class="material-symbols-outlined text-[20px] @(ViewContext.RouteData.Values["Action"]?.ToString() == "Aulas" ? "icon-fill" : "")">menu_book</span>
+            <span class="text-[10px] mt-0.5">Aulas</span>
+        </a>
+        <a asp-controller="Home" asp-action="Simulado" class="flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-colors @(ViewContext.RouteData.Values["Action"]?.ToString() == "Simulado" ? "text-primary font-bold" : "text-slate-400 hover:text-slate-600")">
+            <div class="relative">
+                <span class="material-symbols-outlined text-[22px] @(ViewContext.RouteData.Values["Action"]?.ToString() == "Simulado" ? "text-primary icon-fill" : "text-primary")">quiz</span>
+                <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-rose-500"></span>
+            </div>
+            <span class="text-[10px] mt-0.5 font-bold text-primary">Simulado</span>
+        </a>
+        <a asp-controller="Home" asp-action="Gabarito" class="flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-colors @(ViewContext.RouteData.Values["Action"]?.ToString() == "Gabarito" ? "text-primary font-bold" : "text-slate-400 hover:text-slate-600")">
+            <span class="material-symbols-outlined text-[20px] @(ViewContext.RouteData.Values["Action"]?.ToString() == "Gabarito" ? "icon-fill" : "")">task_alt</span>
+            <span class="text-[10px] mt-0.5">Gabarito</span>
+        </a>
+    </nav>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-auto hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>Plataforma de Matemática Interativa &bull; Aluno: <strong>Carlos Eduardo</strong></span>
+            </div>
+            <div class="text-center md:text-right font-mono">
+                &copy; @DateTime.UtcNow.Year Geometric Insight &bull; .NET 10.0 + Gemini AI Tutor
+            </div>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

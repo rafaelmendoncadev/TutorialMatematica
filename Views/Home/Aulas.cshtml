@@ -1,0 +1,314 @@
+@model TutorialMatematica.Models.StudentProfile
+@{
+    ViewData["Title"] = "Aulas Ilustradas & Exercícios Resolvidos";
+}
+
+<div class="space-y-5 sm:space-y-6">
+
+    <!-- Breadcrumbs -->
+    <div class="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar whitespace-nowrap">
+        <a asp-controller="Home" asp-action="Index" class="hover:text-primary transition-colors">Início</a>
+        <span>›</span>
+        <span>Módulos de Geometria</span>
+        <span>›</span>
+        <span class="text-primary font-bold">Círculo, Quadrado e Triângulos</span>
+    </div>
+
+    <!-- Header Card -->
+    <div class="bg-white border border-indigo-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xs space-y-4 sm:space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-2">
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <span class="bg-indigo-50 text-primary text-[10px] sm:text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border border-indigo-100">
+                        GEOMETRIA PLANA ILUSTRADA
+                    </span>
+                    <span class="text-[11px] sm:text-xs text-slate-500 font-medium">⏱️ Estimativa: 45 min</span>
+                </div>
+                <h1 class="font-extrabold text-xl sm:text-2xl lg:text-3xl text-slate-900 tracking-tight leading-tight">
+                    Geometria Plana & Lógica dos Triângulos
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+                    Relações fundamentais de áreas bidimensionais, métricas de polígonos regulares e o Teorema de Pitágoras com representação geométrica exata.
+                </p>
+            </div>
+            
+            <div class="flex items-center gap-2 w-full md:w-auto shrink-0">
+                <button onclick="window.print()" class="flex-1 md:flex-none justify-center bg-indigo-50 hover:bg-indigo-100 text-primary border border-indigo-200 text-xs font-bold px-3 py-2.5 rounded-xl transition flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[16px]">print</span>
+                    <span>Imprimir</span>
+                </button>
+                <a asp-controller="Home" asp-action="Simulado" class="flex-1 md:flex-none justify-center bg-primary hover:bg-primary-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-primary/20 flex items-center gap-1.5 whitespace-nowrap">
+                    <span class="material-symbols-outlined text-[16px]">play_arrow</span>
+                    <span>Ir ao Simulado</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section Navigation Pills (Horizontal scroll on mobile) -->
+        <div class="flex gap-1.5 sm:gap-2 pt-2 border-t border-slate-100 overflow-x-auto no-scrollbar pb-1">
+            <a href="#geometria" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-indigo-50 text-primary hover:bg-indigo-100 transition-colors whitespace-nowrap">
+                1. Quadrado & Círculo
+            </a>
+            <a href="#triangulos" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-primary transition-colors whitespace-nowrap">
+                2. Triângulos & Pitágoras
+            </a>
+            <a href="#conversao" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-primary transition-colors whitespace-nowrap">
+                3. Escada de Conversão
+            </a>
+            <a href="#exercicios" class="px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-primary transition-colors whitespace-nowrap">
+                4. Exercícios Resolvidos
+            </a>
+        </div>
+    </div>
+
+    <!-- 2 Column Geometry Workspaces -->
+    <div id="geometria" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+
+        <!-- Workspace 1: Quadrado & Círculo -->
+        <div class="bg-white border border-indigo-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs space-y-3 sm:space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="font-bold text-sm sm:text-base text-slate-900 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">square</span>
+                    Área: Quadrado & Círculo
+                </h3>
+                <span class="text-[9px] sm:text-[10px] font-mono font-bold text-primary bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100">
+                    Nível 01
+                </span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                A área representa a extensão superficial bidimensional delimitada pelo contorno da figura. Compare o cálculo linear de um polígono regular com a curvatura constante do raio.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1 sm:pt-2">
+                <!-- Box Quadrado -->
+                <div class="bg-[#FAF8FF] border border-indigo-100/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 text-center space-y-2.5 sm:space-y-3">
+                    <div class="text-[10px] sm:text-[11px] font-bold text-slate-600 uppercase tracking-wider">Quadrado: L = 6 cm</div>
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto border-2 border-primary bg-indigo-100/40 rounded-xl flex items-center justify-center font-mono-math text-xs sm:text-sm font-extrabold text-primary shadow-2xs">
+                        A = L²
+                    </div>
+                    <div class="bg-white py-1.5 sm:py-2 px-3 rounded-xl border border-indigo-100 font-mono-math text-xs font-bold text-primary shadow-2xs">
+                        A = 6² = 36 cm²
+                    </div>
+                </div>
+
+                <!-- Box Círculo -->
+                <div class="bg-[#FAF8FF] border border-indigo-100/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 text-center space-y-2.5 sm:space-y-3">
+                    <div class="text-[10px] sm:text-[11px] font-bold text-slate-600 uppercase tracking-wider">Círculo: r = 2,5 m</div>
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto border-2 border-secondary bg-purple-50 rounded-full flex items-center justify-center font-mono-math text-xs sm:text-sm font-extrabold text-secondary shadow-2xs">
+                        A = π · r²
+                    </div>
+                    <div class="bg-white py-1.5 sm:py-2 px-3 rounded-xl border border-indigo-100 font-mono-math text-xs font-bold text-secondary shadow-2xs">
+                        A ≈ 19,63 m²
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workspace 2: Lógica dos Triângulos -->
+        <div id="triangulos" class="bg-white border border-indigo-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs space-y-3 sm:space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="font-bold text-sm sm:text-base text-slate-900 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-secondary text-lg sm:text-xl">change_history</span>
+                    Triângulos & Pitágoras
+                </h3>
+                <span class="text-[9px] sm:text-[10px] font-mono font-bold text-tutor-purple bg-purple-50 px-2 py-0.5 rounded-full border border-purple-100">
+                    Trigonometria
+                </span>
+            </div>
+
+            <!-- Triangle SVG Diagram -->
+            <div class="bg-[#FAF8FF] border border-indigo-100/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-around gap-3 sm:gap-4">
+                <div class="w-36 h-28 sm:w-40 sm:h-32 flex items-center justify-center shrink-0">
+                    <svg viewBox="0 0 140 100" class="w-full h-full text-primary">
+                        <polygon points="20,80 120,80 20,20" fill="#EEF2FF" stroke="#00288E" stroke-width="2.5"/>
+                        <rect x="20" y="70" width="10" height="10" fill="none" stroke="#00288E" stroke-width="1.5"/>
+                        <circle cx="25" cy="75" r="1.5" fill="#00288E" />
+                        <text x="70" y="93" font-size="10" font-weight="bold" font-family="JetBrains Mono" fill="#1E293B">Base: 4</text>
+                        <text x="2" y="52" font-size="10" font-weight="bold" font-family="JetBrains Mono" fill="#1E293B">h: 3</text>
+                        <text x="80" y="45" font-size="11" font-family="JetBrains Mono" fill="#4E45D5" font-weight="bold">Hip: 5</text>
+                    </svg>
+                </div>
+
+                <div class="font-mono-math text-xs text-primary space-y-1 bg-white p-3 rounded-xl border border-indigo-100 shadow-2xs w-full sm:w-auto">
+                    <div class="text-slate-500 font-bold text-[11px]">Terno Pitagórico (3, 4, 5):</div>
+                    <div class="font-bold">3² + 4² = 5²</div>
+                    <div>9 + 16 = 25</div>
+                    <div class="text-emerald-600 font-bold">25 = 25 &check; Válido</div>
+                </div>
+            </div>
+
+            <div class="bg-indigo-50/70 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-indigo-100 text-xs space-y-1">
+                <div class="font-bold text-primary flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">info</span>
+                    Soma dos Ângulos Internos: 180°
+                </div>
+                <p class="text-slate-600 text-[11px] sm:text-xs leading-relaxed">
+                    Em qualquer geometria euclidiana plana, triângulos são figuras rígidas: os três vértices sempre convergem para 180°.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Simulator Banner Callout -->
+    <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 shadow-md shadow-primary/20">
+        <div class="flex items-center gap-3 sm:gap-4 text-center sm:text-left">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/10 flex items-center justify-center text-white shrink-0 mx-auto sm:mx-0">
+                <span class="material-symbols-outlined text-2xl sm:text-3xl">school</span>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-base sm:text-lg">Pronto para testar seus conhecimentos?</h4>
+                <p class="text-[11px] sm:text-xs text-indigo-100 mt-0.5">Faça o Simulado Oficial de 10 Questões agora com correção em tempo real.</p>
+            </div>
+        </div>
+        <a asp-controller="Home" asp-action="Simulado" class="w-full sm:w-auto text-center bg-white hover:bg-indigo-50 text-primary text-xs sm:text-sm font-extrabold px-6 py-3 sm:py-3.5 rounded-xl transition shadow-md whitespace-nowrap active:scale-95">
+            Iniciar Simulado (10Q) &rarr;
+        </a>
+    </div>
+
+    <!-- Metric Conversion Staircase -->
+    <div id="conversao" class="bg-white border border-indigo-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xs space-y-4 sm:space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+                <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-secondary text-xl">straighten</span>
+                    Escada de Conversão de Medidas (SI)
+                </h3>
+                <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5">Deslize horizontalmente para visualizar toda a sequência métrica</p>
+            </div>
+            <span class="text-[10px] sm:text-xs font-mono font-bold text-primary bg-indigo-50 px-2.5 py-0.5 sm:py-1 rounded-full self-start sm:self-auto border border-indigo-100">
+                PADRÃO DECIMAL
+            </span>
+        </div>
+
+        <!-- Scrollable staircase container on mobile -->
+        <div class="flex md:grid md:grid-cols-7 gap-2 overflow-x-auto pb-2 no-scrollbar font-mono-math">
+            <div class="min-w-[85px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl text-center">
+                <div class="text-[9px] text-slate-400 font-bold">&times; 10 &rsaquo;</div>
+                <div class="font-extrabold text-sm sm:text-base text-primary mt-0.5">km</div>
+                <div class="text-[9px] text-slate-500 font-sans">Quilômetro</div>
+            </div>
+            <div class="min-w-[85px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl text-center">
+                <div class="text-[9px] text-slate-400 font-bold">&times; 10 &rsaquo;</div>
+                <div class="font-extrabold text-sm sm:text-base text-primary mt-0.5">hm</div>
+                <div class="text-[9px] text-slate-500 font-sans">Hectômetro</div>
+            </div>
+            <div class="min-w-[85px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl text-center">
+                <div class="text-[9px] text-slate-400 font-bold">&times; 10 &rsaquo;</div>
+                <div class="font-extrabold text-sm sm:text-base text-primary mt-0.5">dam</div>
+                <div class="text-[9px] text-slate-500 font-sans">Decâmetro</div>
+            </div>
+            <div class="min-w-[95px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-indigo-50 border-2 border-primary rounded-xl sm:rounded-2xl shadow-xs text-center">
+                <div class="text-[9px] text-primary font-bold">PADRÃO (1)</div>
+                <div class="font-extrabold text-base sm:text-lg text-primary mt-0.5">m</div>
+                <div class="text-[9px] text-primary font-bold font-sans">Metro (Base)</div>
+            </div>
+            <div class="min-w-[85px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl text-center">
+                <div class="text-[9px] text-slate-400 font-bold">&lsaquo; &divide; 10</div>
+                <div class="font-extrabold text-sm sm:text-base text-primary mt-0.5">dm</div>
+                <div class="text-[9px] text-slate-500 font-sans">Decímetro</div>
+            </div>
+            <div class="min-w-[85px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl text-center">
+                <div class="text-[9px] text-slate-400 font-bold">&lsaquo; &divide; 10</div>
+                <div class="font-extrabold text-sm sm:text-base text-primary mt-0.5">cm</div>
+                <div class="text-[9px] text-slate-500 font-sans">Centímetro</div>
+            </div>
+            <div class="min-w-[85px] md:min-w-0 flex-1 p-2.5 sm:p-3 bg-[#FAF8FF] border border-indigo-100 rounded-xl sm:rounded-2xl text-center">
+                <div class="text-[9px] text-slate-400 font-bold">&lsaquo; &divide; 10</div>
+                <div class="font-extrabold text-sm sm:text-base text-primary mt-0.5">mm</div>
+                <div class="text-[9px] text-slate-500 font-sans">Milímetro</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 pt-1 text-xs">
+            <div class="p-3.5 sm:p-4 bg-indigo-50/70 rounded-xl sm:rounded-2xl border border-indigo-100 space-y-1">
+                <div class="font-bold text-primary flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">line_axis</span>
+                    Medidas Lineares (Comprimento):
+                </div>
+                <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Cada salto para a direita <strong class="text-primary font-semibold">multiplica por 10</strong>. Para a esquerda <strong class="text-primary font-semibold">divide por 10</strong>.
+                </p>
+                <div class="font-mono-math text-[11px] text-primary pt-0.5 font-bold">
+                    Ex: 4,25 km = 4,25 &times; 1.000 = 4.250 m
+                </div>
+            </div>
+
+            <div class="p-3.5 sm:p-4 bg-purple-50/70 rounded-xl sm:rounded-2xl border border-purple-100 space-y-1">
+                <div class="font-bold text-tutor-purple flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">grid_view</span>
+                    Medidas de Superfície (Área):
+                </div>
+                <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Por ser ao quadrado (10²), cada salto para a direita <strong class="text-tutor-purple font-semibold">multiplica por 100</strong> e para a esquerda <strong class="text-tutor-purple font-semibold">divide por 100</strong>.
+                </p>
+                <div class="font-mono-math text-[11px] text-tutor-purple pt-0.5 font-bold">
+                    Ex: 1 m² = (100 cm)² = 10.000 cm²
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solved Exercises -->
+    <div id="exercicios" class="bg-white border border-indigo-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xs space-y-4 sm:space-y-6">
+        <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-emerald-600 text-xl">edit_note</span>
+                Exercícios Resolvidos Passo a Passo
+            </h3>
+            <span class="text-[10px] sm:text-xs text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 sm:py-1 rounded-full">
+                2 Modelos
+            </span>
+        </div>
+
+        <!-- Exercise 1 -->
+        <div class="border border-indigo-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 space-y-3 sm:space-y-4 bg-[#FAF8FF]/50">
+            <div class="flex items-center justify-between">
+                <span class="bg-indigo-50 text-primary text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-indigo-100">
+                    EXEMPLO 01 &bull; FIGURA COMPOSTA
+                </span>
+                <span class="text-[11px] text-slate-500 font-medium">Inscrição</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed">
+                Determine a área da região não ocupada de um quadrado de lado 10 cm que circunscreve um círculo de raio 5 cm. (Adote &pi; = 3,14)
+            </p>
+            <div class="space-y-2 text-xs font-mono-math">
+                <div class="p-2.5 sm:p-3 bg-white rounded-xl border border-indigo-100 text-slate-700">
+                    <strong class="text-primary font-sans">Passo 1:</strong> Área do quadrado: <span class="text-slate-900 font-bold">A = 10² = 100 cm²</span>
+                </div>
+                <div class="p-2.5 sm:p-3 bg-white rounded-xl border border-indigo-100 text-slate-700">
+                    <strong class="text-primary font-sans">Passo 2:</strong> Área do círculo: <span class="text-slate-900 font-bold">A = 3,14 &times; 5² = 78,5 cm²</span>
+                </div>
+                <div class="p-2.5 sm:p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 font-bold">
+                    <span>Resultado:</span> A_sobra = 100 - 78,5 = 21,5 cm²
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise 2 -->
+        <div class="border border-indigo-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 space-y-3 sm:space-y-4 bg-[#FAF8FF]/50">
+            <div class="flex items-center justify-between">
+                <span class="bg-indigo-50 text-primary text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-indigo-100">
+                    EXEMPLO 02 &bull; PITÁGORAS NA PRÁTICA
+                </span>
+                <span class="text-[11px] text-slate-500 font-medium">Dimensionamento</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed">
+                Um triângulo retângulo tem cateto a = 6 m e hipotenusa c = 10 m. Determine o segundo cateto e sua área.
+            </p>
+            <div class="space-y-2 text-xs font-mono-math">
+                <div class="p-2.5 sm:p-3 bg-white rounded-xl border border-indigo-100 text-slate-700">
+                    <strong class="text-primary font-sans">Passo 1:</strong> Pitágoras: <span class="text-slate-900 font-bold">6² + b² = 10² &rarr; b² = 64 &rarr; b = 8 m</span>
+                </div>
+                <div class="p-2.5 sm:p-3 bg-white rounded-xl border border-indigo-100 text-slate-700">
+                    <strong class="text-primary font-sans">Passo 2:</strong> Área: <span class="text-slate-900 font-bold">A = (8 &times; 6) / 2 = 24 m²</span>
+                </div>
+                <div class="p-2.5 sm:p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 font-bold">
+                    <span>Resultado:</span> Cateto = 8 metros e Área = 24 m².
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

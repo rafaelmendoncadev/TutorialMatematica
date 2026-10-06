@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoMath Studio - Simulado Oficial (10 Questões)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#faf8ff] text-[#131b2e] font-sans antialiased min-h-screen">
+
+  <!-- Simulado Top Header -->
+  <header class="bg-white border-b border-[#dae2fd] sticky top-0 z-30 px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2 font-display font-extrabold text-lg text-[#00288e]">
+        <svg class="w-6 h-6 text-[#1e40af]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 22 22 22"/>
+        </svg>
+        <span>GeoMath</span>
+      </div>
+      <span class="bg-[#eaedff] text-[#00288e] text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border border-[#dae2fd]">
+        SIMULADO OFICIAL
+      </span>
+      <span class="text-xs text-[#444653] hidden md:inline">Geometria Espacial & Plana · 10 Questões</span>
+    </div>
+
+    <div class="flex items-center space-x-8">
+      <div class="flex items-center space-x-2 bg-[#f2f3ff] px-3.5 py-1.5 rounded-full border border-[#dae2fd]">
+        <span class="w-2 h-2 rounded-full bg-[#dc2626] animate-pulse"></span>
+        <span class="text-xs font-mono font-bold text-[#131b2e]">Tempo decorrido: 12:40</span>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-3">
+        <div class="text-right text-xs">
+          <div class="font-semibold text-[#131b2e]">Progresso: 4 de 10</div>
+          <div class="text-[10px] text-[#444653]">40% concluído</div>
+        </div>
+        <div class="w-20 bg-[#dae2fd] h-2 rounded-full overflow-hidden">
+          <div class="bg-[#1e40af] h-full rounded-full" style="width: 40%"></div>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <span class="bg-[#faf5ff] text-[#7c3aed] text-xs font-semibold px-2.5 py-1 rounded-full border border-[#e9d5ff] flex items-center space-x-1">
+          <span>✨</span><span>Tutor IA Ativo</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Golden Rule Alert Banner -->
+  <div class="bg-[#f2f3ff] border-b border-[#dae2fd] px-6 py-2.5 text-xs text-[#1e40af] flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <span>🛡️</span>
+      <span><strong>Regra de Ouro:</strong> Para ser aprovado é necessário acertar <strong>10 de 10 questões (100%)</strong>. Ao concluir, clique em Corrigir Prova para ver o gabarito detalhado e tirar dúvidas com o Tutor IA.</span>
+    </div>
+    <a href="1_dashboard.html" class="text-xs font-semibold text-[#444653] hover:text-[#00288e] hover:underline">Sair do Exame</a>
+  </div>
+
+  <div class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+    <!-- Left Column: Question Navigator & Formulas -->
+    <div class="space-y-6">
+      
+      <!-- Exam Map Card -->
+      <div class="bg-white border border-[#dae2fd] rounded-2xl p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-display font-bold text-sm text-[#131b2e]">Mapa do Exame</h3>
+          <span class="text-[10px] font-mono text-[#757684]">10 ITENS</span>
+        </div>
+
+        <!-- Question Grid -->
+        <div class="grid grid-cols-5 gap-2">
+          <button class="h-10 rounded-xl bg-[#ecfdf5] border border-[#a7f3d0] text-[#065f46] text-xs font-bold font-mono flex flex-col items-center justify-center">
+            <span>01</span><span class="text-[9px]">✓</span>
+          </button>
+          <button class="h-10 rounded-xl bg-[#ecfdf5] border border-[#a7f3d0] text-[#065f46] text-xs font-bold font-mono flex flex-col items-center justify-center">
+            <span>02</span><span class="text-[9px]">✓</span>
+          </button>
+          <button class="h-10 rounded-xl bg-[#fffbeb] border border-[#fde68a] text-[#b45309] text-xs font-bold font-mono flex flex-col items-center justify-center">
+            <span>03</span><span class="text-[9px]">⚠️</span>
+          </button>
+          <button class="h-10 rounded-xl bg-[#00288e] text-white text-xs font-bold font-mono ring-2 ring-[#00288e] ring-offset-2 flex flex-col items-center justify-center shadow-sm">
+            <span>04</span><span class="text-[9px]">●</span>
+          </button>
+          <button class="h-10 rounded-xl bg-[#ecfdf5] border border-[#a7f3d0] text-[#065f46] text-xs font-bold font-mono flex flex-col items-center justify-center">
+            <span>05</span><span class="text-[9px]">✓</span>
+          </button>
+          <button class="h-10 rounded-xl bg-[#faf8ff] border border-[#dae2fd] text-[#444653] text-xs font-bold font-mono flex items-center justify-center hover:bg-[#eaedff]">
+            06
+          </button>
+          <button class="h-10 rounded-xl bg-[#faf8ff] border border-[#dae2fd] text-[#444653] text-xs font-bold font-mono flex items-center justify-center hover:bg-[#eaedff]">
+            07
+          </button>
+          <button class="h-10 rounded-xl bg-[#faf8ff] border border-[#dae2fd] text-[#444653] text-xs font-bold font-mono flex items-center justify-center hover:bg-[#eaedff]">
+            08
+          </button>
+          <button class="h-10 rounded-xl bg-[#faf8ff] border border-[#dae2fd] text-[#444653] text-xs font-bold font-mono flex items-center justify-center hover:bg-[#eaedff]">
+            09
+          </button>
+          <button class="h-10 rounded-xl bg-[#faf8ff] border border-[#dae2fd] text-[#444653] text-xs font-bold font-mono flex items-center justify-center hover:bg-[#eaedff]">
+            10
+          </button>
+        </div>
+
+        <!-- Legend -->
+        <div class="space-y-1.5 text-[11px] text-[#444653] pt-2 border-t border-[#dae2fd]">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#00288e]"></span>
+            <span>Questão atual</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#059669]"></span>
+            <span>Respondida (3)</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#d97706]"></span>
+            <span>Em revisão (1)</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#dae2fd]"></span>
+            <span>Não respondida (6)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula Cheat Sheet -->
+      <div class="bg-[#faf8ff] border border-[#dae2fd] rounded-2xl p-5 shadow-sm space-y-2">
+        <div class="text-xs font-bold text-[#00288e] flex items-center space-x-1.5">
+          <span>∑</span><span>Lembrete de Fórmulas</span>
+        </div>
+        <div class="font-mono text-xs text-[#444653] space-y-1">
+          <div>Área do Círculo:</div>
+          <div class="text-[#00288e] font-bold">A = π · r²</div>
+          <div class="text-[10px] text-[#757684]">Considere π ≈ 3,14</div>
+          <div class="pt-1">1 m = 100 cm</div>
+          <div>1 m² = 10.000 cm²</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Question 4 Container -->
+    <div class="lg:col-span-3 space-y-6">
+      
+      <div class="bg-white border border-[#dae2fd] rounded-2xl p-7 shadow-sm space-y-6">
+
+        <!-- Question Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-[#dae2fd]">
+          <div class="flex items-center space-x-2">
+            <span class="bg-[#eaedff] text-[#00288e] text-xs font-bold px-2.5 py-1 rounded-lg">
+              Questão 04 de 10
+            </span>
+            <span class="text-xs text-[#444653]">Geometria: Área do Círculo e Sistema de Medidas</span>
+          </div>
+          <button class="text-xs text-[#444653] hover:text-[#d97706] flex items-center space-x-1 border border-[#dae2fd] px-3 py-1.5 rounded-lg transition">
+            <span>🔖</span><span>Marcar para Revisão</span>
+          </button>
+        </div>
+
+        <!-- Problem Statement -->
+        <div class="text-sm text-[#131b2e] leading-relaxed space-y-3">
+          <p>
+            Um engenheiro paisagista está projetando uma praça circular destinada à preservação ambiental. No centro da praça, foi delimitado um canteiro circular com raio medindo exatamente <strong class="font-mono text-[#00288e]">r = 2,5 metros</strong>.
+          </p>
+          <p>
+            Para o revestimento com grama especial anti-erosão, o fornecedor exige que o cálculo da área seja fornecido formalmente em <strong class="text-[#131b2e]">centímetros quadrados (cm²)</strong>. Considerando o valor aproximado de <strong class="font-mono text-[#00288e]">π = 3,14</strong>, qual é a área exata do canteiro que deverá ser informada ao fornecedor?
+          </p>
+        </div>
+
+        <!-- Technical Diagram Box -->
+        <div class="bg-[#faf8ff] border border-[#dae2fd] rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-2 max-w-sm">
+            <span class="text-[10px] font-mono font-bold text-[#1e40af] bg-[#eaedff] px-2 py-0.5 rounded">
+              ESBOÇO TÉCNICO 2D
+            </span>
+            <h4 class="font-display font-bold text-sm text-[#131b2e]">Diagrama Transversal do Canteiro</h4>
+            <p class="text-xs text-[#444653] leading-relaxed">
+              Observe o raio <strong class="font-mono">r</strong> projetado a partir da origem central O(0,0) até a borda perimetral. Atente-se para a conversão de escala métrica: <span class="font-mono font-bold text-[#00288e]">1 m = 100 cm</span>.
+            </p>
+            <div class="font-mono text-xs text-[#444653] flex space-x-3 pt-1">
+              <span class="bg-white px-2 py-1 rounded border border-[#dae2fd]">Raio (r): 2,5 m = 250 cm</span>
+              <span class="bg-white px-2 py-1 rounded border border-[#dae2fd]">Constante (π): 3,14</span>
+            </div>
+          </div>
+
+          <!-- SVG Circle Graphic -->
+          <div class="bg-white p-4 rounded-xl border border-[#dae2fd] shadow-sm flex items-center justify-center">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+              <circle cx="75" cy="75" r="55" fill="#f2f3ff" stroke="#1e40af" stroke-width="2"/>
+              <line x1="75" y1="75" x2="130" y2="75" stroke="#1e40af" stroke-width="2" stroke-dasharray="3 3"/>
+              <circle cx="75" cy="75" r="3" fill="#00288e"/>
+              <text x="68" y="72" font-size="9" font-family="monospace" fill="#444653">O</text>
+              <text x="85" y="70" font-size="9" font-family="monospace" fill="#1e40af" font-weight="bold">r = 2,5 m</text>
+              <text x="100" y="140" font-size="8" font-family="monospace" fill="#757684">Escala 1:50</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Multiple Choice Options -->
+        <div class="space-y-3">
+          <div class="text-xs font-semibold text-[#444653] uppercase tracking-wider">
+            Selecione uma única alternativa:
+          </div>
+
+          <!-- Option A -->
+          <label class="flex items-center space-x-3 p-3.5 rounded-xl border border-[#dae2fd] hover:bg-[#faf8ff] cursor-pointer transition">
+            <input type="radio" name="resposta" class="w-4 h-4 text-[#00288e]">
+            <span class="w-6 h-6 rounded-lg bg-[#f2f3ff] text-[#1e40af] text-xs font-bold flex items-center justify-center font-mono">A</span>
+            <span class="font-mono text-sm text-[#131b2e]">19.625 cm²</span>
+          </label>
+
+          <!-- Option B -->
+          <label class="flex items-center space-x-3 p-3.5 rounded-xl border border-[#dae2fd] hover:bg-[#faf8ff] cursor-pointer transition">
+            <input type="radio" name="resposta" class="w-4 h-4 text-[#00288e]">
+            <span class="w-6 h-6 rounded-lg bg-[#f2f3ff] text-[#1e40af] text-xs font-bold flex items-center justify-center font-mono">B</span>
+            <span class="font-mono text-sm text-[#131b2e]">78.500 cm²</span>
+          </label>
+
+          <!-- Option C (Selected) -->
+          <label class="flex items-center justify-between p-3.5 rounded-xl border-2 border-[#00288e] bg-[#eaedff]/30 cursor-pointer transition">
+            <div class="flex items-center space-x-3">
+              <input type="radio" name="resposta" checked class="w-4 h-4 text-[#00288e]">
+              <span class="w-6 h-6 rounded-lg bg-[#00288e] text-white text-xs font-bold flex items-center justify-center font-mono">C</span>
+              <span class="font-mono text-sm font-bold text-[#00288e]">196.250 cm²</span>
+            </div>
+            <span class="text-[11px] font-semibold text-[#00288e] bg-[#eaedff] px-2.5 py-1 rounded-full">
+              Alternativa Marcada
+            </span>
+          </label>
+
+          <!-- Option D -->
+          <label class="flex items-center space-x-3 p-3.5 rounded-xl border border-[#dae2fd] hover:bg-[#faf8ff] cursor-pointer transition">
+            <input type="radio" name="resposta" class="w-4 h-4 text-[#00288e]">
+            <span class="w-6 h-6 rounded-lg bg-[#f2f3ff] text-[#1e40af] text-xs font-bold flex items-center justify-center font-mono">D</span>
+            <span class="font-mono text-sm text-[#131b2e]">1.962.500 cm²</span>
+          </label>
+
+          <!-- Option E -->
+          <label class="flex items-center space-x-3 p-3.5 rounded-xl border border-[#dae2fd] hover:bg-[#faf8ff] cursor-pointer transition">
+            <input type="radio" name="resposta" class="w-4 h-4 text-[#00288e]">
+            <span class="w-6 h-6 rounded-lg bg-[#f2f3ff] text-[#1e40af] text-xs font-bold flex items-center justify-center font-mono">E</span>
+            <span class="font-mono text-sm text-[#131b2e]">628.000 cm²</span>
+          </label>
+        </div>
+
+        <!-- AI Tutor Tip Box -->
+        <div class="bg-[#faf5ff] border border-[#e9d5ff] rounded-xl p-4 flex items-start space-x-3">
+          <span class="text-base text-[#7c3aed]">💡</span>
+          <div class="text-xs text-[#444653] leading-relaxed">
+            <strong class="text-[#7c3aed]">Dica do Tutor IA:</strong> Certifique-se de realizar a potenciação do raio após convertê-lo para centímetros (250 cm × 250 cm = 62.500 cm²), multiplicando em seguida pelo valor de π.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Navigation Bar -->
+      <div class="bg-white border border-[#dae2fd] rounded-2xl p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+        <button class="text-xs font-semibold text-[#444653] hover:text-[#131b2e] px-4 py-2.5 rounded-xl border border-[#dae2fd] transition">
+          ← Questão Anterior
+        </button>
+
+        <span class="text-xs text-[#757684] font-mono">Questão 4 de 10 gravada</span>
+
+        <div class="flex items-center space-x-3 w-full md:w-auto">
+          <button class="bg-[#f2f3ff] hover:bg-[#eaedff] text-[#00288e] text-xs font-semibold px-4 py-2.5 rounded-xl transition">
+            Próxima Questão →
+          </button>
+          <a href="4_gabarito.html" class="bg-[#00288e] hover:bg-[#1e40af] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-md transition flex items-center space-x-2">
+            <span>📝</span><span>Concluir e Corrigir Prova</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

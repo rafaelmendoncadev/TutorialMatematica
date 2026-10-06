@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoMath Studio - Gabarito & Tutor IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#faf8ff] text-[#131b2e] font-sans antialiased min-h-screen">
+
+  <!-- Top Navbar -->
+  <header class="bg-white border-b border-[#dae2fd] sticky top-0 z-30 px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-6">
+      <div class="flex items-center space-x-2 font-display font-extrabold text-xl text-[#00288e]">
+        <svg class="w-6 h-6 text-[#1e40af]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 22 22 22"/>
+        </svg>
+        <span>GeoMath</span>
+      </div>
+      <span class="bg-[#f2f3ff] text-[#1e40af] text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border border-[#dae2fd]">
+        GABARITO OFICIAL
+      </span>
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-medium">
+        <a href="1_dashboard.html" class="px-3 py-1.5 rounded-lg text-[#444653] hover:text-[#00288e] flex items-center space-x-1.5">
+          <span>📐</span><span>Trilha</span>
+        </a>
+        <a href="2_aulas.html" class="px-3 py-1.5 rounded-lg text-[#444653] hover:text-[#00288e] flex items-center space-x-1.5">
+          <span>📖</span><span>Aulas</span>
+        </a>
+        <a href="3_simulado.html" class="px-3 py-1.5 rounded-lg text-[#444653] hover:text-[#00288e] flex items-center space-x-1.5">
+          <span>📝</span><span>Simulados</span>
+        </a>
+        <a href="#" class="px-3 py-1.5 rounded-lg bg-[#faf5ff] text-[#7c3aed] font-semibold flex items-center space-x-1.5">
+          <span>✨</span><span>Tutor IA</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#f2f3ff] border border-[#dae2fd] text-xs font-mono font-semibold text-[#1e40af]">
+        <span>⚡</span><span>1.640 XP (+400)</span>
+      </div>
+      <a href="3_simulado.html" class="bg-[#00288e] hover:bg-[#1e40af] text-white text-xs font-bold px-3.5 py-2 rounded-xl transition">
+        Refazer Simulado
+      </a>
+      <div class="w-8 h-8 rounded-full bg-[#1e40af] text-white flex items-center justify-center font-bold text-xs">
+        L
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+    <!-- Left Sidebar: Scorecard -->
+    <div class="space-y-6">
+      <div class="bg-white border border-[#dae2fd] rounded-2xl p-5 shadow-sm space-y-4">
+        <div>
+          <h3 class="font-display font-bold text-sm text-[#131b2e]">Gabarito da Prova</h3>
+          <p class="text-[11px] text-[#444653]">Simulado 10/10 finalizado</p>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center justify-between p-2.5 bg-[#f2f3ff] rounded-xl border border-[#dae2fd]">
+            <span class="text-[#444653]">Desempenho Geral</span>
+            <span class="font-bold font-mono text-[#00288e] bg-white px-2 py-0.5 rounded">80%</span>
+          </div>
+          <div class="flex items-center justify-between p-2.5 bg-[#ecfdf5] rounded-xl border border-[#a7f3d0] text-[#065f46]">
+            <span>Questões Corretas</span>
+            <span class="font-bold font-mono">8</span>
+          </div>
+          <div class="flex items-center justify-between p-2.5 bg-[#fef2f2] rounded-xl border border-[#fecaca] text-[#991b1b]">
+            <span>Questões Incorretas</span>
+            <span class="font-bold font-mono">2</span>
+          </div>
+          <div class="flex items-center justify-between p-2.5 bg-[#faf8ff] rounded-xl border border-[#dae2fd] text-[#444653]">
+            <span>Questões em Branco</span>
+            <span class="font-bold font-mono">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Tutor Prompt Card -->
+      <div class="bg-gradient-to-br from-[#faf5ff] to-white border border-[#e9d5ff] rounded-2xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center space-x-2 text-[#7c3aed]">
+          <span>✨</span>
+          <h4 class="font-display font-bold text-xs">Tutor IA Ativo</h4>
+        </div>
+        <p class="text-xs text-[#444653] leading-relaxed">
+          Dúvidas nas respostas incorretas? Você pode conversar interativamente com o tutor abaixo para compreender as passagens matemáticas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="lg:col-span-3 space-y-6">
+
+      <!-- Result Banner -->
+      <div class="bg-white border border-[#dae2fd] rounded-2xl p-6 shadow-sm space-y-5">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-xl">
+            <span class="bg-[#fef2f2] text-[#991b1b] text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border border-[#fecaca]">
+              ⚠️ CRITÉRIO NÃO ATINGIDO NESTA TENTATIVA
+            </span>
+            <h1 class="font-display font-extrabold text-2xl text-[#131b2e]">
+              Resultado: 8 de 10 Acertos (80%)
+            </h1>
+            <p class="text-xs text-[#444653] leading-relaxed">
+              A aprovação requer <strong>100% de acerto (10/10)</strong> para certificar o domínio absoluto do módulo. Você errou 2 questões. Veja as correções detalhadas abaixo, tire suas dúvidas com nosso Tutor IA e clique em <em>'Gerar Nova Prova'</em> para tentar novamente!
+            </p>
+          </div>
+
+          <div class="bg-[#faf8ff] border border-[#dae2fd] rounded-2xl p-4 w-full md:w-56 shrink-0 text-center space-y-2">
+            <div class="w-16 h-16 mx-auto rounded-full border-4 border-[#00288e] flex items-center justify-center font-display font-black text-xl text-[#00288e]">
+              8/10
+            </div>
+            <div class="text-[11px] text-[#059669] font-bold">✓ 8 Corretas (+400 XP)</div>
+            <div class="text-[11px] text-[#dc2626] font-bold">✗ 2 Incorretas (Revisar)</div>
+            <div class="text-[10px] text-[#757684]">⏱️ Tempo: 14m 30s</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[#dae2fd]">
+          <a href="3_simulado.html" class="bg-[#00288e] hover:bg-[#1e40af] text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-sm transition">
+            🔄 Gerar Nova Prova (10 Questões)
+          </a>
+          <a href="2_aulas.html" class="bg-[#f2f3ff] hover:bg-[#eaedff] text-[#00288e] text-xs font-semibold px-4 py-2.5 rounded-xl transition">
+            📖 Revisar Conteúdo das Aulas
+          </a>
+        </div>
+      </div>
+
+      <!-- Question 4 Review (Incorrect with AI Tutor) -->
+      <div class="bg-white border-2 border-[#fca5a5] rounded-2xl p-6 shadow-sm space-y-5">
+        
+        <div class="flex items-center justify-between pb-3 border-b border-[#fee2e2]">
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-full bg-[#fef2f2] text-[#991b1b] flex items-center justify-center text-xs font-bold">✗</span>
+            <span class="font-display font-bold text-sm text-[#991b1b]">Questão 4 · Resposta Incorreta</span>
+          </div>
+          <span class="text-xs text-[#444653]">Geometria Plana > Área de Figuras Circulares e Conversão Métrica</span>
+        </div>
+
+        <!-- Problem Statement -->
+        <p class="text-xs text-[#131b2e] leading-relaxed">
+          <strong>Enunciado da Questão:</strong> Um engenheiro paisagista projeta uma praça circular cujo raio de pavimentação mede exatamente <span class="font-mono text-[#00288e]">r = 2,5 m</span>. Deseja-se revestir todo o piso com mosaicos milimétricos. Qual é a área total dessa região expressa rigorosamente em <strong>centímetros quadrados (cm²)</strong>? (Considere π = 3,14).
+        </p>
+
+        <!-- Comparison Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Student Answer (Red) -->
+          <div class="p-4 rounded-xl bg-[#fef2f2] border border-[#fecaca] space-y-2">
+            <div class="flex items-center space-x-1.5 text-xs font-bold text-[#991b1b]">
+              <span>✗</span><span>VOCÊ MARCOU (ALTERNATIVA A)</span>
+            </div>
+            <div class="font-mono text-base font-bold text-[#991b1b]">
+              Área = 19.625 cm²
+            </div>
+            <p class="text-[11px] text-[#7f1d1d] leading-relaxed">
+              Erro identificado: Você aplicou a escala de conversão linear (1 m = 100 cm) e multiplicou por 100 em vez de converter a unidade para centímetros antes de elevar ao quadrado.
+            </p>
+          </div>
+
+          <!-- Correct Answer (Green) -->
+          <div class="p-4 rounded-xl bg-[#ecfdf5] border border-[#a7f3d0] space-y-2">
+            <div class="flex items-center space-x-1.5 text-xs font-bold text-[#065f46]">
+              <span>✓</span><span>GABARITO CORRETO (ALTERNATIVA C)</span>
+            </div>
+            <div class="font-mono text-base font-bold text-[#065f46]">
+              Área = 196.250 cm²
+            </div>
+            <p class="text-[11px] text-[#064e3b] leading-relaxed">
+              Cálculo exato: Raio r = 2,5 m = 250 cm. Área = π · r² = 3,14 · (250)² = 3,14 · 62.500 = 196.250 cm².
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Step-by-Step Proof -->
+        <div class="bg-[#faf8ff] border border-[#dae2fd] rounded-xl p-4 space-y-2 text-xs font-mono">
+          <div class="text-[#00288e] font-bold">1. Identificação do Parâmetro da Unidade:</div>
+          <div class="text-[#444653] pl-3">O raio foi fornecido em metros (2,5 m), mas o resultado final foi exigido expressamente em cm²: 2,5 m = 250 cm.</div>
+          
+          <div class="text-[#00288e] font-bold pt-1">2. Aplicação da Fórmula da Área do Círculo:</div>
+          <div class="text-[#444653] pl-3">A = π · r² = 3,14 · (250 cm)² = 3,14 · 62.500 cm² = 196.250 cm².</div>
+        </div>
+
+        <!-- Interactive AI Tutor Chat Box -->
+        <div class="bg-gradient-to-br from-[#faf5ff] to-white border border-[#e9d5ff] rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-[#7c3aed]">
+              <span>✨</span>
+              <h3 class="font-display font-bold text-sm">Dúvida sobre esta questão? Pergunte ao Tutor IA</h3>
+            </div>
+            <span class="text-[10px] font-mono text-[#7c3aed] bg-[#f3e8ff] px-2 py-0.5 rounded-full">MODO INTERATIVO</span>
+          </div>
+
+          <!-- Student Bubble -->
+          <div class="flex justify-end">
+            <div class="bg-[#00288e] text-white text-xs p-3 rounded-2xl rounded-tr-sm max-w-md shadow-sm">
+              Por que precisei converter o raio para centímetros antes de elevar ao quadrado?
+            </div>
+          </div>
+
+          <!-- Tutor AI Bubble -->
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-full bg-[#7c3aed] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+              IA
+            </div>
+            <div class="bg-white border border-[#e9d5ff] p-4 rounded-2xl rounded-tl-sm text-xs space-y-2 shadow-sm max-w-xl text-[#131b2e] leading-relaxed">
+              <div class="font-bold text-[#7c3aed]">Tutor IA (GeoMath):</div>
+              <p>
+                Olá! Essa é uma dúvida conceitual muito inteligente. O segredo reside na <strong>dimensão das grandezas físicas</strong>:
+              </p>
+              <div class="bg-[#faf5ff] p-2.5 rounded-lg border border-[#e9d5ff] font-mono text-[11px] space-y-1 text-[#7c3aed]">
+                <div>• O raio r é uma grandeza linear (comprimento em 1 dimensão: de [m] para [cm]).</div>
+                <div>• Quando você eleva ao quadrado, você está criando uma grandeza de superfície (área: 2 dimensões): [1 m²] = [100 cm]² = 10.000 cm².</div>
+              </div>
+              <p>
+                Se você calcular a área em metros quadrados primeiro: <span class="font-mono">A = 3,14 · (2,5)² = 19,625 m²</span>. Para converter esse resultado para cm², você deve multiplicar por 10.000 (100²), e não por 1.000! Multiplicando <span class="font-mono">19,625 × 10.000 = 196.250 cm²</span>.
+              </p>
+              <div class="p-2 bg-[#ecfdf5] border border-[#a7f3d0] rounded text-[#065f46] text-[11px]">
+                💡 <strong>Dica de ouro:</strong> Sempre transforme as medidas lineares para a unidade solicitada no enunciado <em>antes</em> de aplicar qualquer potência ou fórmula de área e volume!
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Bar -->
+          <div class="flex items-center space-x-2 pt-2">
+            <input type="text" placeholder="Pergunte mais detalhes sobre esta questão ou sua resolução..." class="flex-1 bg-[#faf8ff] text-xs text-[#131b2e] rounded-xl px-4 py-2.5 border border-[#dae2fd] focus:border-[#7c3aed] focus:bg-white focus:outline-none transition">
+            <button class="bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center space-x-1 shadow-sm">
+              <span>Enviar</span><span>↗</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Question 1 Review (Correct) -->
+      <div class="bg-white border border-[#dae2fd] rounded-2xl p-5 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-full bg-[#ecfdf5] text-[#059669] flex items-center justify-center text-xs font-bold">✓</span>
+            <span class="font-display font-bold text-sm text-[#059669]">Questão 1 · Acerto Perfeito (+50 XP)</span>
+          </div>
+          <span class="text-xs text-[#444653]">Triângulos Retângulos · Teorema de Pitágoras e Relações Métricas</span>
+        </div>
+        <p class="text-xs text-[#131b2e]">
+          Enunciado: Um triângulo retângulo possui catetos medindo a = 6 cm e b = 8 cm. Determine o comprimento exato da hipotenusa.
+        </p>
+        <div class="flex space-x-4 text-xs font-mono">
+          <span class="p-2 bg-[#ecfdf5] rounded border border-[#a7f3d0] text-[#065f46]">Sua Escolha: Alternativa C: 10 cm ✓</span>
+          <span class="p-2 bg-[#faf8ff] rounded border border-[#dae2fd] text-[#444653]">Gabarito: 10 cm (6² + 8² = 36 + 64 = 100 → √100 = 10 cm)</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
